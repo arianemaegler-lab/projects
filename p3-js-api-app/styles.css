@@ -1,0 +1,360 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* BODY */
+body {
+  background: linear-gradient(135deg, #0f172a 0%, #1a1f35 100%);
+  color: white;
+  min-height: 100vh;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  border-bottom: 1px solid #1e293b;
+  backdrop-filter: blur(10px);
+  background: rgba(15, 23, 42, 0.8);
+}
+
+.navbar h1 {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.hero h2 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.hero span {
+  background: linear-gradient(120deg, #6366f1, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero p {
+  color: #94a3b8;
+  margin-bottom: 40px;
+  font-size: 18px;
+}
+
+/* INPUT GROUP */
+.input-group {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+input,
+select {
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  background: #1e293b;
+  color: white;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+#topic {
+  flex: 1;
+  min-width: 250px;
+}
+
+#count {
+  width: 140px;
+}
+
+.template-select {
+  width: 200px;
+  cursor: pointer;
+}
+
+/* BUTTONS */
+.btn-primary {
+  background: linear-gradient(120deg, #6366f1, #4f46e5);
+  padding: 12px 28px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: #475569;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 600;
+}
+
+.btn-secondary:hover {
+  background: #334155;
+}
+
+/* MODAL */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  padding: 40px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 85vh;
+  overflow-y: auto;
+  border: 1px solid #334155;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: slideIn 0.4s ease;
+}
+
+.modal-content h3 {
+  color: #6366f1;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* LOADING */
+body.loading::after {
+  content: "✨ Generating your presentation...";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: #6366f1;
+  animation: pulse 1.5s infinite;
+  z-index: 999;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* SUCCESS MESSAGE */
+.success-message {
+  padding: 30px;
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  border-radius: 12px;
+  border: 2px solid #6366f1;
+  animation: slideIn 0.5s ease;
+}
+
+.success-message h3 {
+  color: #6366f1;
+  margin-bottom: 20px;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.success-message p {
+  color: #cbd5e1;
+  margin: 12px 0;
+  font-size: 15px;
+}
+
+.success-message strong {
+  color: #f1f5f9;
+}
+
+.success-message code {
+  background: #0f172a;
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: #6366f1;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+}
+
+/* ACTION BUTTONS */
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  margin: 25px 0;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.action-buttons .btn-primary,
+.action-buttons .btn-secondary {
+  white-space: nowrap;
+}
+
+/* SLIDE PREVIEW */
+.slide-preview {
+  margin-top: 25px;
+  padding: 20px;
+  background: #0f172a;
+  border-radius: 10px;
+  border: 1px solid #334155;
+}
+
+.slide-preview h4 {
+  color: #cbd5e1;
+  margin-bottom: 15px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.preview-slide {
+  border-left: 4px solid #6366f1;
+  padding: 15px;
+  margin: 12px 0;
+  background: #1e293b;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.preview-slide:hover {
+  transform: translateX(5px);
+  border-left-color: #ec4899;
+}
+
+.preview-slide strong {
+  color: #6366f1;
+  font-size: 15px;
+}
+
+.preview-slide ul {
+  margin: 10px 0;
+  padding-left: 20px;
+  color: #94a3b8;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.preview-slide li {
+  margin: 5px 0;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 20px;
+  }
+
+  .hero h2 {
+    font-size: 32px;
+  }
+
+  .input-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  input,
+  select {
+    width: 100%;
+  }
+
+  .modal-content {
+    padding: 20px;
+    width: 95%;
+    max-height: 90vh;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .action-buttons button {
+    width: 100%;
+  }
+}
+
+/* SCROLLBAR STYLING */
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: #0f172a;
+  border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: #6366f1;
+  border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: #4f46e5;
+}
