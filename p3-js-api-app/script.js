@@ -1,17 +1,18 @@
 // ============================================
-// GEMINI API CONFIG
+// NETLIFY FUNCTION CALLER
 // ============================================
-
-let config;
-let GEMINI_API_URL;
-
-fetch("config.json")
-  .then(response => response.json())
-  .then(data => {
-    config = data;
-    GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${config.GEMINI_API_KEY}`;
-    console.log("✅ Config loaded successfully");
-  })
+async function callAI(prompt) {
+  const response = await fetch('/.netlify/functions/match', {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ prompt }),
+  });
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.error || "Request failed.");
+  }
+  return await response.json();
+}
 
 // ============================================
 // DESIGN TEMPLATES (with Google Slides colors)
@@ -188,32 +189,10 @@ Slide 2: Another Title
 
 Continue this format for all ${count} slides.`;
 
-  const response = await fetch(GEMINI_API_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      contents: [
-        {
-          parts: [
-            {
-              text: prompt,
-            },
-          ],
-        },
-      ],
-    }),
-  });
-
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(getErrorMessage(response.status, data));
-  }
+  const data = await callAI(prompt);
 
   const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-  if (!text) throw new Error("No content from Gemini API");
+  if (!text) throw new Error("No content from AI");
 
   return parseSlides(text);
 }
@@ -726,4 +705,3 @@ window.addEventListener("DOMContentLoaded", () => {
     console.log("📂 Loaded saved slides from localStorage");
   }
 });
-
