@@ -8,6 +8,12 @@ const ConfigManager = (() => {
   let loadError = null;
 
   async function load() {
+    // The API key is stored in Netlify and used only by the serverless function.
+    config = Object.freeze({});
+    loadError = null;
+    return true;
+
+    /* Legacy local configuration loader retained temporarily for reference.
     try {
       const response = await fetch("config.json");
       if (!response.ok) {
@@ -40,6 +46,7 @@ const ConfigManager = (() => {
       );
       return false;
     }
+    */
   }
 
   function ensureLoaded() {
@@ -402,19 +409,23 @@ const ErrorHandler = {
 // ============================================
 // 📍 LOCATION 8: GEMINI API CLIENT (Single Responsibility)
 // ============================================
-const response = await fetch("/.netlify/functions/generate-slides", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ topic, count })
-});
+const GeminiClient = {
+  async generateContent(topic, count) {
+    const response = await fetch("/.netlify/functions/generate-slides", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ topic, count })
+    });
 
-const data = await response.json();
+    const data = await response.json();
 
-if (!response.ok) {
-  throw new Error(data.error || `API Error ${response.status}`);
-}
+    if (!response.ok) {
+      throw new Error(data.error || `API Error ${response.status}`);
+    }
 
-return data.text;
+    return data.text;
+  }
+};
 // const GeminiClient = {
 //   async generateContent(topic, count) {
 //     if (!ConfigManager.isReady()) {
